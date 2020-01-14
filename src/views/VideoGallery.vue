@@ -37,6 +37,8 @@
                                 v-if="strokes"
                                 :ref="`doodle-video-${i}-${j}`"
                                 :strokes="strokes"
+                                :thumbnail="video.thumbnail"
+                                :whiteboardID="video['.key']"
                                 :canvasID="`${i}-${j}`"
                                 @animation-loaded="hasFetchedVideos = true"
                               />

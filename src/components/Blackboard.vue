@@ -503,29 +503,29 @@ export default {
     },
     async handleSaving (videoTitle) {
       // mark the whiteboard as saved 
-      const whiteboardID = this.whiteboardDoc['.key']
-      const classID = this.$route.params.class_id
+      const whiteboardID = this.whiteboardDoc['.key'];
+      const classID = this.$route.params.class_id;
 
-      // take a screenshot of the whiteboard to be used as the "preview" of the video
-      // const dataURL = this.canvas.toDataURL()
-      // const videoThumbnail = this.canvas.toDataURL()
+      // Take a screenshot of the whiteboard.
+      const videoThumbnail = this.canvas.toDataURL();
 
       let metadata = {
         title: videoTitle, 
         fromClass: classID,
         isSaved: true,
         tabNumber: 0,
-        // thumbnail: videoThumbnail // toDataURL takes a screenshot of a canvas and encodes it as an image URL
-      }
+        thumbnail: videoThumbnail
+      };
+
       if (this.user) {
-        metadata.authorUID = this.user.uid
-        metadata.authorEmail = this.user.email
+        metadata.authorUID = this.user.uid;
+        metadata.authorEmail = this.user.email;
         if (this.user.name) {
-          metadata.authorName = this.user.name
+          metadata.authorName = this.user.name;
         }
       }
       if (this.currentTime) {
-        metadata.duration = this.currentTime
+        metadata.duration = this.currentTime;
       }
       db.collection('whiteboards').doc(whiteboardID).update(metadata)
 

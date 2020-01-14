@@ -12,8 +12,22 @@ export default {
       this.setStyle(this.color, this.lineWidth) // turns out the above code resets color and lineWidth
       // only redraw when the user has finished resizing the window
       if (redraw) {
-        clearTimeout(this.redrawTimeout) // rescaleCanvas() called again during the 400 milliseconds, so cancel 
-        this.redrawTimeout = setTimeout(this.drawStrokesInstantly, 200) // resizing the canvas causes all drawings to be lost 
+        clearTimeout(this.redrawTimeout) // rescaleCanvas() called again during the 400 milliseconds, so cancel
+        let canvas = this;
+
+        this.redrawTimeout = setTimeout(() => {
+          // Add thumbnail if one exists.
+          // TODO(bobbyluig): Remove test after migration is complete.
+          if (this.thumbnail && this.indexOfNextStroke === 0) {
+            let thumbnail = new Image();
+            thumbnail.onload = function () {
+              canvas.ctx.drawImage(thumbnail, 0, 0, canvas.canvas.width, canvas.canvas.height);
+            };
+            thumbnail.src = this.thumbnail;
+          } else {
+            this.drawStrokesInstantly();
+          }
+        }, 200) // resizing the canvas causes all drawings to be lost
       }
     },
     async startSync(getTimeInSeconds) {

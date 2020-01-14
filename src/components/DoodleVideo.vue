@@ -4,9 +4,11 @@
       v-if="strokes"
       ref="animation"
       :strokes="strokes"
+      :thumbnail="thumbnail"
       :isFullscreen="false"
       :canvasID="canvasID"
       :height="height"
+      :whiteboardID="whiteboardID"
       @animation-loaded="handleAnimationLoaded()"
       @animation-finished="handleEvent()"
     />
@@ -34,7 +36,9 @@ export default {
     strokes: Array,
     audioURL: String,
     canvasID: String,
-    height: String
+    height: String,
+    thumbnail: String,
+    whiteboardID: String,
   },
   components: {
     DoodleVideoAnimation,
@@ -64,7 +68,7 @@ export default {
       }
     },
     handleAnimationLoaded () {
-      this.animationLoaded = true 
+      this.animationLoaded = true
       this.$emit("animation-loaded")
     },
     quickplay () {

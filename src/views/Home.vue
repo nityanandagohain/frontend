@@ -45,6 +45,7 @@
                       <DoodleVideo 
                         v-if="strokes"
                         :strokes="strokes"
+                        whiteboardID="BlEjXn7RP7q8YwxG8FLO"
                         canvasID="1"
                         @animation-loaded="hasFetchedVideos = true"
                       />
@@ -62,6 +63,7 @@
                       <DoodleVideo 
                         v-if="strokes"
                         :strokes="strokes"
+                        whiteboardID="8hcybKON8Br67bNUA9TJ"
                         canvasID="2"
                         @animation-loaded="hasFetchedVideos = true"
                       />
@@ -79,6 +81,7 @@
                       <DoodleVideo 
                         v-if="strokes"
                         :strokes="strokes"
+                        whiteboardID="vgPkZWvsqvt9pImHiMbe"
                         canvasID="3"
                         @animation-loaded="hasFetchedVideos = true"
                       />

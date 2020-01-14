@@ -131,7 +131,7 @@ export default {
       // fix delete button logic
       this.video = video
       console.log("video =", video)
-      this.thumbnail = video.thumbnail
+      this.thumbnail = video.tt
       // audio 
       this.audioURL = video.audioURL
       // visual 

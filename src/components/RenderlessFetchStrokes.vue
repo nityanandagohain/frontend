@@ -34,7 +34,7 @@ export default {
   methods: {
     async fetchStrokes () {
       if (!this.whiteboardID) {
-        return 
+        return
       }
       const baseRef = db.collection("whiteboards").doc(this.whiteboardID)
       if (this.hasSubcollection === false) {
