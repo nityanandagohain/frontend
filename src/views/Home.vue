@@ -100,12 +100,21 @@
         </v-container>
       </v-card>
       <transition name="fade" mode="out-in">
+<<<<<<< HEAD
         <div v-if="isFetchingUser || user === null" key="loading..."></div>
         <div v-else key="class-list">
           <BaseGrid>
             <v-col v-for="(s, i) in user.enrolledClasses" :key="i">
                 <v-card @click="$router.push(`${i}/questions/`)">
                     <v-card-title>{{s.name}}</v-card-title>
+=======
+        <div v-if="isFetchingUser | user==null" key="loading..."></div>
+        <div v-else key="class-list">
+          <BaseGrid>
+            <v-col v-for="(c, i) in this.user.enrolledClasses" :key="i">
+                <v-card @click="$router.push(`${c.classID}/questions`)">
+                    <v-card-title>{{c.classID}}</v-card-title>
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
                 </v-card>
             </v-col>
           </BaseGrid>
@@ -116,6 +125,7 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import { mapState } from "vuex";
 import firebase from "firebase/app";
 import "firebase/auth";
@@ -129,6 +139,19 @@ import SearchBar from "@/components/SearchBar.vue";
 import KaryDialog from "@/components/KaryDialog.vue";
 import { initEnrollementService } from "../dep";
 import { encodeKey } from "../dep";
+=======
+import { mapState } from 'vuex'
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import db from '@/database.js'
+import BaseGrid from "@/components/BaseGrid.vue"
+import BaseCard from "@/components/BaseCard.vue"
+import HomeAppBar from "@/components/HomeAppBar.vue"
+import RenderlessFetchStrokes from "@/components/RenderlessFetchStrokes.vue"
+import DoodleVideo from "@/components/DoodleVideo.vue"
+import SearchBar from "@/components/SearchBar.vue"
+import KaryDialog from "@/components/KaryDialog.vue"
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
 
 export default {
   components: {
@@ -148,16 +171,24 @@ export default {
       snackbar: false,
       snackbarMessage: "",
 
+<<<<<<< HEAD
       enrollementService: initEnrollementService(),
       chosenClass: "",
       searchBarDialog: false,
       searchBarDialogOptions: ["No", "Yes"]
     };
+=======
+      chosenClass: '',
+      searchBarDialog: false,
+      searchBarDialogOptions: ['No', 'Yes']
+    }
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
   },
   created() {
     this.fetchClasses();
   },
   methods: {
+<<<<<<< HEAD
     fetchClasses() {
       this.classes = [];
       db.collection("classes")
@@ -169,6 +200,16 @@ export default {
             this.classesIDs.push(docObj.name);
           });
         });
+=======
+    fetchClasses () {
+        this.classes = []
+        db.collection("classes").get().then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          this.classes.push({ ".key": doc.id, ...doc.data()})
+          this.classesIDs.push(doc.id)
+        })
+      })  
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
     },
 
     classChosen(answer) {
@@ -176,6 +217,7 @@ export default {
       this.chosenClass = answer;
     },
     searchBarDialogSubmitted(answer) {
+<<<<<<< HEAD
       if (answer == "No") {
         this.chosenClass = "";
         this.searchBarDialog = false;
@@ -191,6 +233,46 @@ export default {
       const ref = db.collection("classes").doc(classID);
       await ref.set({
         name,
+=======
+        if(answer == 'No'){
+            this.chosenClass = ''
+            this.searchBarDialog = false
+            return
+        }
+
+        let userDoc = db.collection("users").doc(this.user.uid)
+
+        userDoc.get().then(doc => {
+            let A = {...doc.data()}.enrolledClasses;
+            for(let x of A){
+                if(x.classID == this.chosenClass){
+                    this.chosenClass = null
+                    this.searchBarDialog = false
+                    return
+                }
+            }
+
+            var enrolledClassObj = {
+                classID: this.chosenClass,
+                settings: {
+                notification: {
+                    newQuestion: "always",
+                    },
+                }
+            }
+            userDoc.update({
+                enrolledClasses: firebase.firestore.FieldValue.arrayUnion(enrolledClassObj)
+            })
+            this.chosenClass = ''
+            this.searchBarDialog = false
+        })
+    },
+
+    async createClass (courseNumber) {
+      const ref = db.collection('classes').doc(courseNumber)
+      await ref.set({ 
+        courseNumber,
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
         description: "description",
         introVideoID: "4zV1vCQE3CDAuZC8vtEw", // always initialize picture to Sun, Moon and Lake
         paragraph: "paragraph",

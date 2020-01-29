@@ -8,6 +8,7 @@
       </template>
     </v-banner>
     <v-container tag="section" class="py-5">
+<<<<<<< HEAD
       <div class="question-main">
         <v-textarea
           class="input-title"
@@ -97,6 +98,32 @@
         </v-container>
       </v-card>
       <div class="blackboard-container" v-show="this.blackboardAttached">
+=======
+      <v-textarea
+        filled
+        :label="postType"
+        :placeholder="`Type ${postType} here...`"
+        v-model="postDescription"
+      />
+
+        <v-container v-if="withTags">
+            <div id="Tags">
+                <SearchBar
+                label="Enter a Tag"
+                :items="tagsPool"
+                @submit="addTag"
+                />
+                
+                <Tags
+                :items="postTags"
+                :removable="true"
+                @delete="deleteTag"
+                />
+            </div>
+        </v-container>
+
+      <div class="blackboard-container">
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
         <BlackboardMini 
           ref="blackboard-mini"
           :visible="visible"

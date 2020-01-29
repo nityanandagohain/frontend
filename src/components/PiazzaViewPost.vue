@@ -1,5 +1,6 @@
 <!-- Given a post, display its text and its blackboard -->
 <template>
+<<<<<<< HEAD
   <v-card id="view-post">
     <v-card-title class="post-header py-2">{{ postType }}</v-card-title>
     <v-container class="py-5 px-5">
@@ -22,6 +23,36 @@
       Posted by {{ post.isAnonymous? 'Anonymous':post.author.name }}
     </footer>
   </v-card>
+=======
+  <div id="view-post">
+    <v-textarea
+      class="pa-2"
+      readonly
+      name="input-7-4"
+      :value="post.description"
+    />
+    <v-container>
+        <Tags
+            :items="post.postTags"
+            :removable="false" 
+        >
+        </Tags>
+    </v-container>
+    <RenderlessFetchStrokes :whiteboardID="post.blackboardID" :hasSubcollection="false">
+      <template slot-scope="{ strokes }">
+        <!-- length check is necessary because a length 0 array does not necessarily === [] (TODO: investigate why) -->
+        <DoodleVideo 
+          v-if="strokes.length !== 0"
+          :strokes="strokes"
+          :canvasID="`${postNumber}`"
+          :audioURL="post.audioURL"
+          :height="`${getFullWidth() * 9/16}`"
+          @animation-loaded="hasFetchedVideos = true"
+        />
+      </template>
+    </RenderlessFetchStrokes>
+  </div>
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
 </template>
 
 <script>

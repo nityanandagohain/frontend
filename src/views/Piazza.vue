@@ -1,8 +1,13 @@
 <template>
   <div>
     <BaseAppBar 
+<<<<<<< HEAD
       :icon="isViewingPost && isMobile ? 'back' : undefined" 
       @icon-click="backToList()"
+=======
+      :icon="viewingPost && isMobile ? 'back' : undefined" 
+      @icon-click="backToList()" 
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
     />
     <v-content>
       <v-container fluid class="py-0" ref="main">

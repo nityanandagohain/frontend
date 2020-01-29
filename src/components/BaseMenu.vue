@@ -33,6 +33,7 @@
         <v-divider></v-divider>
 
         <v-list>
+<<<<<<< HEAD
           <v-list-item v-for="(s, i) in user.enrolledClasses" :key="i">
             <v-container>
               <v-list-item-title>{{s.name}}</v-list-item-title>
@@ -49,6 +50,13 @@
                 </v-radio-group>
               </v-list-item-action>
             </v-container>
+=======
+          <v-list-item>
+            <v-list-item-action>
+              <v-switch v-model="message" color="purple"></v-switch>
+            </v-list-item-action>
+            <v-list-item-title>Enable notifications</v-list-item-title>
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
           </v-list-item>
         </v-list>
         <v-card-actions>
@@ -64,8 +72,13 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import "vue-swatches/dist/vue-swatches.min.css";
 import { initEnrollementService } from "../dep";
+=======
+import Swatches from 'vue-swatches'
+import 'vue-swatches/dist/vue-swatches.min.css'
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
 
 export default {
   props: {
@@ -101,6 +114,7 @@ export default {
       else updatedUser.name = this.user.name;
       this.$emit("save", updatedUser);
     },
+<<<<<<< HEAD
     classNotifChanged(classID, frequency) {
       this.enrollementService.changeNotification(
         this.user,
@@ -108,6 +122,31 @@ export default {
         "newQuestion",
         frequency
       );
+=======
+    data: () => ({
+      fav: true,
+      menu: false,
+      message: false,
+      name: "",
+      useDarkMode: false,
+      color: "",
+      colors: ["black", "grey", "red", "orange", "yellow", "green", "blue", "purple"]
+    }),
+    methods: {
+      handleSave () {
+        this.menu = false 
+        const updatedUser = {
+          useDarkMode: this.useDarkMode,
+          // color: this.color
+        }
+        if (this.name) {
+          updatedUser.name = this.name
+        } else {
+          updatedUser.name = this.user.name
+        }
+        this.$emit("save", updatedUser)
+      }
+>>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
     }
   }
 };
