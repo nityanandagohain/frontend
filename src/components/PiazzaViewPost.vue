@@ -1,29 +1,5 @@
 <!-- Given a post, display its text and its blackboard -->
 <template>
-<<<<<<< HEAD
-  <v-card id="view-post">
-    <v-card-title class="post-header py-2">{{ postType }}</v-card-title>
-    <v-container class="py-5 px-5">
-      <h3 class="post-title">{{ post.title }}</h3>
-      <div class="post-description mb-5">{{ post.description }} </div>
-      <div v-if="post.image" class="image-container">
-        <img :src="post.image"/>
-      </div>
-      <DoodleVideo 
-      :whiteboardID="post.blackboardID" 
-      :hasSubcollection="false"
-      :canvasID="`${postNumber}`"
-      :audioURL="post.audioURL"
-      :height="`${getFullWidth() * 9/16}`"
-      ref = "DoodleVideo"
-      @full-video-ready="initVideo()"
-      />
-    </v-container>
-    <footer class="post-footer px-4 py-3">
-      Posted by {{ post.isAnonymous? 'Anonymous':post.author.name }}
-    </footer>
-  </v-card>
-=======
   <div id="view-post">
     <v-textarea
       class="pa-2"
@@ -52,7 +28,6 @@
       </template>
     </RenderlessFetchStrokes>
   </div>
->>>>>>> parent of 5abb4bf... add enrollement srevice, changed enrolledClasses strucutre, made the home page reactive to the new Class Name/ID seperation, added the change notification feature, commented out the tags feature until it is fully functional
 </template>
 
 <script>
